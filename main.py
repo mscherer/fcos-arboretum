@@ -9,8 +9,6 @@ artefacts = ['kernel', 'initramfs', 'rootfs']
 # TODO make it dynamic
 supported_arch = ['x86_64']
 
-hostName = "localhost"
-serverPort = 8080
 
 # url 
 #  /stable/
@@ -46,7 +44,7 @@ rootfs = rootfs
 """.format(arch=arch, version=version)
 
 
-class MyServer(BaseHTTPRequestHandler):
+class ArboretumHandler(BaseHTTPRequestHandler):
 
     def return_404(self):
         self.send_response(404)
@@ -104,9 +102,7 @@ class MyServer(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
 
-    # TODO fix that        
-    webServer = HTTPServer((hostName, serverPort), MyServer)
-    print("Server started http://%s:%s" % (hostName, serverPort))
+    webServer = HTTPServer(('', 8080), ArboretumHandler)
 
     try:
         webServer.serve_forever()
