@@ -1,7 +1,6 @@
 FROM fedora:32
-USER webserver
-RUN adduser webserver
-EXPOSE 8080
-COPY main.py .
 MAINTAINER Michael Scherer <misc@redhat.com>
+COPY main.py .
+USER nobody
+EXPOSE 8080
 CMD ["./main.py"]
